@@ -1,36 +1,135 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>motchutcutee</title>
   <style>
     body {
-      background-color: #fef4f8;
+      margin: 0;
       font-family: 'Segoe UI', sans-serif;
+      background-color: #fffafc;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      margin: 0;
+      overflow: hidden;
       text-align: center;
     }
-    h1 {
-      color: #e75480;
-      font-size: 2em;
-      margin-bottom: 10px;
+
+    img {
+      max-width: 100%;
+      max-height: 60vh;
+      display: none;
     }
-    p {
-      color: #444;
+
+    .text {
+      font-size: 1.6em;
+      margin-top: 20px;
+      color: #e75480;
+      display: none;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: none;
+    }
+
+    button {
       font-size: 1.2em;
-      max-width: 500px;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #accept {
+      background-color: #8bc34a;
+      color: white;
+    }
+
+    #decline {
+      background-color: #f06292;
+      color: white;
+      position: relative;
+    }
+
+    #hoitham {
+      max-width: 100%;
+      max-height: 70vh;
+      display: none;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>Chào Thảo! 🌸</h1>
-  <p>Hôm nay đi làm có vui không? Có chuyện gì muốn kể với tớ không nè? 🥰<br>
-  Dù thế nào thì cũng nhớ giữ gìn sức khoẻ nha!</p>
+  <img id="img1" src="thodilamve.jpg" />
+  <img id="img2" src="nha.jpg" />
+  <img id="img3" src="cua2.png" />
+  <img id="img4" src="chao.gif" />
+  <img id="hoitham" src="hoitham.webp" />
+
+  <div class="text" id="text"></div>
+
+  <div class="buttons" id="buttons">
+    <button id="accept">Chấp nhận</button>
+    <button id="decline">Không nhé</button>
+  </div>
+
+  <script>
+    const images = [
+      { id: "img1", text: "en en en, về nhà thui" },
+      { id: "img2", text: "Đến nhà ùi" },
+      { id: "img3", text: "Vào nhà thôi" },
+      {
+        id: "img4",
+        text: "Xin chào Thảo, rất vui được gặp bạn. Tôi là mèo máy Doraemon được anh bạn kia gửi đến để làm bạn với cậu, cho tôi ở nhờ nhé.",
+      },
+    ];
+
+    let current = 0;
+
+    function showNextImage() {
+      if (current > 0) {
+        document.getElementById(images[current - 1].id).style.display = "none";
+      }
+
+      if (current < images.length) {
+        const imgObj = images[current];
+        document.getElementById(imgObj.id).style.display = "block";
+        const text = document.getElementById("text");
+        text.style.display = "block";
+        text.innerText = imgObj.text;
+        current++;
+        setTimeout(showNextImage, 3000);
+      } else {
+        // Hiện 2 nút lựa chọn
+        document.getElementById("buttons").style.display = "block";
+      }
+    }
+
+    showNextImage();
+
+    // Button events
+    document.getElementById("accept").addEventListener("click", () => {
+      document.getElementById("img4").style.display = "none";
+      document.getElementById("text").style.display = "none";
+      document.getElementById("buttons").style.display = "none";
+      document.getElementById("hoitham").style.display = "block";
+    });
+
+    // Né nút "Không nhé"
+    const declineBtn = document.getElementById("decline");
+    declineBtn.addEventListener("mouseover", () => {
+      const x = Math.floor(Math.random() * (window.innerWidth - 150));
+      const y = Math.floor(Math.random() * (window.innerHeight - 100));
+      declineBtn.style.position = "absolute";
+      declineBtn.style.left = x + "px";
+      declineBtn.style.top = y + "px";
+    });
+  </script>
 </body>
 </html>
