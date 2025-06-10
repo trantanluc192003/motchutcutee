@@ -27,7 +27,6 @@
       opacity: 0;
     }
 
-    /* Tăng kích thước riêng cho ảnh nhà */
     #img2 {
       height: 95vh;
       width: auto;
@@ -132,6 +131,7 @@
       {
         id: "img4",
         text: "Xin chào Thảo, rất vui được gặp bạn. Tôi là mèo máy Doraemon được anh bạn kia gửi đến để làm bạn với cậu, cho tôi ở nhờ nhé.",
+        showButtonsAfter: true,
       },
     ];
 
@@ -150,13 +150,14 @@
         imgEl.classList.add("show");
         textEl.classList.add("show");
 
-        // Gọi hiệu ứng đánh máy
         typeWriter(imgObj.text, textEl, 0, () => {
-          current++;
-          setTimeout(showNextImage, 3000);
+          if (imgObj.showButtonsAfter) {
+            document.getElementById("buttons").style.display = "block";
+          } else {
+            current++;
+            setTimeout(showNextImage, 3000);
+          }
         });
-      } else {
-        document.getElementById("buttons").style.display = "block";
       }
     }
 
