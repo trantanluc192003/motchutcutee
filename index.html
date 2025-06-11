@@ -18,6 +18,7 @@
       align-items: center;
       height: 100vh;
       overflow: hidden;
+      position: relative;
     }
 
     .scene {
@@ -80,6 +81,7 @@
       opacity: 0;
       transition: opacity 1s ease;
       min-height: 80px;
+      text-align: center;
     }
 
     .text.show {
@@ -123,20 +125,22 @@
     #hoitham {
       max-height: 70vh;
       display: none;
-      margin-top: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      z-index: 10;
     }
 
-    .response-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    #extraButtons {
       margin-top: 20px;
+      display: none;
     }
 
-    .response-buttons button {
-      background-color: #64b5f6;
+    #extraButtons button {
+      background-color: #ffb74d;
       color: white;
     }
   </style>
@@ -159,9 +163,9 @@
 
   <img id="hoitham" src="hoitham.webp" alt="Hỏi thăm">
 
-  <div id="extraButtons" class="response-buttons" style="display: none;">
-    <button id="tired">Có, Thỏ thấy hơi mệt</button>
-    <button id="notTired">Không mệt tí nào</button>
+  <div class="buttons" id="extraButtons">
+    <button>Có, Thỏ thấy hơi mệt</button>
+    <button>Không mệt tí nào</button>
   </div>
 
   <script>
@@ -214,8 +218,9 @@
       document.querySelectorAll("img").forEach(img => img.classList.remove("show"));
       textEl.classList.remove("show");
       buttons.style.display = "none";
-      hoitham.style.display = "block";
-      dora.style.display = "block";
+
+      dora.style.display = "none"; // Ẩn Doraemon chào
+      hoitham.style.display = "block"; // Hiện ảnh hoitham
 
       setTimeout(() => {
         textEl.innerHTML = "";
@@ -229,16 +234,6 @@
           }, 2000);
         });
       }, 500);
-    });
-
-    document.getElementById("tired").addEventListener("click", () => {
-      textEl.innerHTML = "Vậy thì nghỉ ngơi chút nha, Dora ôm một cái nè 🤗";
-      extraButtons.style.display = "none";
-    });
-
-    document.getElementById("notTired").addEventListener("click", () => {
-      textEl.innerHTML = "Ghê thật đó! Cậu giỏi ghê 😎";
-      extraButtons.style.display = "none";
     });
 
     const declineBtn = document.getElementById("decline");
