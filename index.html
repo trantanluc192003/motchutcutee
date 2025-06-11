@@ -25,15 +25,18 @@
 
     .scene {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
       width: 100%;
       max-width: 1000px;
       height: 60vh;
+      padding: 0 40px;
     }
 
     .scene img {
       max-height: 55vh;
+      width: auto;
+      max-width: 45%;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
       opacity: 0;
@@ -50,6 +53,7 @@
       max-height: 65vh;
       margin-top: 10px;
       display: none;
+      opacity: 0;
       transition: opacity 1s ease;
     }
 
@@ -147,6 +151,9 @@
     const textEl = document.getElementById("text");
     const dora = document.getElementById("dora");
     const buttons = document.getElementById("buttons");
+    const nha = document.getElementById("nha");
+    const tho = document.getElementById("tho");
+    const cua = document.getElementById("cua");
 
     function typeWriter(text, element, i, callback) {
       if (i < text.length) {
@@ -158,16 +165,19 @@
     }
 
     function startSequence() {
-      // Bước 1: hiện thỏ & nhà
-      document.getElementById("nha").classList.add("show");
-      document.getElementById("tho").classList.add("show");
+      // Hiện ảnh thỏ & nhà
+      nha.classList.add("show");
+      tho.classList.add("show");
 
-      // Bước 2: sau 2s hiện cửa
+      // Sau 2 giây: ẩn 2 ảnh, hiện cửa
       setTimeout(() => {
-        document.getElementById("cua").classList.add("show");
+        nha.classList.remove("show");
+        tho.classList.remove("show");
+        cua.classList.add("show");
 
-        // Bước 3: sau 2.5s hiện Doraemon và text
+        // Sau thêm 2 giây: ẩn cửa, hiện Doraemon + text
         setTimeout(() => {
+          cua.classList.remove("show");
           dora.style.display = "block";
           textEl.classList.add("show");
           typeWriter(
@@ -178,7 +188,7 @@
               buttons.style.display = "block";
             }
           );
-        }, 2500);
+        }, 2000);
       }, 2000);
     }
 
