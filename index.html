@@ -127,6 +127,18 @@
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
     }
+
+    .response-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .response-buttons button {
+      background-color: #64b5f6;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -147,6 +159,11 @@
 
   <img id="hoitham" src="hoitham.webp" alt="Hỏi thăm">
 
+  <div id="extraButtons" class="response-buttons" style="display: none;">
+    <button id="tired">Có, Thỏ thấy hơi mệt</button>
+    <button id="notTired">Không mệt tí nào</button>
+  </div>
+
   <script>
     const textEl = document.getElementById("text");
     const dora = document.getElementById("dora");
@@ -155,6 +172,8 @@
     const tho = document.getElementById("tho");
     const cua = document.getElementById("cua");
     const scene = document.getElementById("scene");
+    const hoitham = document.getElementById("hoitham");
+    const extraButtons = document.getElementById("extraButtons");
 
     function typeWriter(text, element, i, callback) {
       if (i < text.length) {
@@ -166,16 +185,13 @@
     }
 
     function startSequence() {
-      // B1: hiện ảnh thỏ & nhà
       nha.classList.add("show");
       tho.classList.add("show");
 
-      // B2: sau 2s ẩn ảnh thỏ & nhà, hiện cửa
       setTimeout(() => {
         scene.style.display = "none";
         cua.classList.add("show");
 
-        // B3: sau 2s hiện Doraemon + text
         setTimeout(() => {
           cua.classList.remove("show");
           dora.style.display = "block";
@@ -198,7 +214,31 @@
       document.querySelectorAll("img").forEach(img => img.classList.remove("show"));
       textEl.classList.remove("show");
       buttons.style.display = "none";
-      document.getElementById("hoitham").style.display = "block";
+      hoitham.style.display = "block";
+      dora.style.display = "block";
+
+      setTimeout(() => {
+        textEl.innerHTML = "";
+        textEl.classList.add("show");
+        typeWriter("Tớ biết là cậu sẽ chấp nhận cho tớ ở nhờ mà hihi", textEl, 0, () => {
+          setTimeout(() => {
+            textEl.innerHTML = "";
+            typeWriter("Hôm nay cậu đi làm về có mệt không", textEl, 0, () => {
+              extraButtons.style.display = "flex";
+            });
+          }, 2000);
+        });
+      }, 500);
+    });
+
+    document.getElementById("tired").addEventListener("click", () => {
+      textEl.innerHTML = "Vậy thì nghỉ ngơi chút nha, Dora ôm một cái nè 🤗";
+      extraButtons.style.display = "none";
+    });
+
+    document.getElementById("notTired").addEventListener("click", () => {
+      textEl.innerHTML = "Ghê thật đó! Cậu giỏi ghê 😎";
+      extraButtons.style.display = "none";
     });
 
     const declineBtn = document.getElementById("decline");
