@@ -203,6 +203,8 @@
   <div id="dishes" class="dish-container">
   <img id="chagio" src="chagio.jpg" alt="Chả giò">
   <img id="bokho" src="bokho.jpg" alt="Bò kho">
+  <img id="xucdong" src="cute.gif" style="display: none; width: 200px; margin: 20px auto;" />
+
   </div>
   <img id="khoanhtay" src="khoanhtay.jpg" alt="Không chấp nhận" style="display:none; max-height: 60vh; margin-top: 20px;">
   <div id="retry-container" style="display:none; text-align: center;">
@@ -325,6 +327,25 @@
                             noBtn.style.transition = "transform 0.2s ease";
                           });
                           document.getElementById("yes-btn").classList.add("blink");
+                          document.getElementById("yes-btn").addEventListener("click", () => {
+                            // Ẩn các món ăn
+                            document.getElementById("dishes").style.display = "none";
+                            document.getElementById("chagio").style.display = "none";
+                            document.getElementById("bokho").style.display = "none";
+
+                            // Ẩn review
+                            document.getElementById("review-container").style.display = "none";
+
+                            // Hiện ảnh cute
+                            document.getElementById("xucdong").style.display = "block";
+
+                            // Hiện dòng chữ sau 1 giây
+                            setTimeout(() => {
+                              textEl.innerHTML = "";
+                              textEl.classList.add("show");
+                              typeWriter("Trời ơi, lần đầu tớ nấu món này mà được Thỏ khen, xúc động quá huhu", textEl, 0);
+                            }, 1000);
+                          });
                         }, 5000);
                       });
                     }, 3000);
