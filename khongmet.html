@@ -1,0 +1,69 @@
+<!-- khongmet.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Không mệt</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background-color: #fff6f6;
+      padding: 40px;
+    }
+    #image {
+      width: 300px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    #message {
+      font-size: 20px;
+      margin: 20px 0;
+      display: none;
+    }
+    #retryBtn {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #ff7675;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+    }
+    #retryBtn:hover {
+      background-color: #d63031;
+    }
+  </style>
+</head>
+<body>
+
+  <img id="image" src="khoanhtay.jpg" alt="Khoanh tay không chấp nhận">
+  <div id="message">Nè nè, đi làm cả ngày mà không mệt á! Đừng có lừa tuiii 😤</div>
+  <button id="retryBtn">Chọn lại đii</button>
+
+  <script>
+    // Hiện ảnh ngay khi tải trang
+    window.onload = function() {
+      document.getElementById('image').style.display = 'block';
+
+      // Sau 3 giây hiện dòng thoại
+      setTimeout(function() {
+        document.getElementById('message').style.display = 'block';
+      }, 3000);
+
+      // Sau 5 giây hiện nút
+      setTimeout(function() {
+        document.getElementById('retryBtn').style.display = 'inline-block';
+      }, 5000);
+
+      // Xử lý khi nhấn "Chọn lại đii"
+      document.getElementById('retryBtn').onclick = function() {
+        // Quay lại trang trước (có 2 nút chọn)
+        window.location.href = 'index.html'; // Hoặc đổi lại thành tên file gốc của bạn
+      };
+    };
+  </script>
+
+</body>
+</html>
