@@ -34,9 +34,9 @@
     }
 
     .scene img {
-      max-height: 55vh;
+      max-height: 60vh;
       width: auto;
-      max-width: 45%;
+      max-width: 48%;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
       opacity: 0;
@@ -143,6 +143,21 @@
       background-color: #ffb74d;
       color: white;
     }
+
+    #introText {
+      font-size: 1.8em;
+      color: #ff4081;
+      margin-top: 20px;
+      display: none;
+      opacity: 0;
+      transition: opacity 1s ease;
+      text-align: center;
+    }
+
+    #introText.show {
+      display: block;
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -151,6 +166,8 @@
     <img id="nha" src="nha.jpg" alt="Nhà thỏ">
     <img id="tho" src="thodilamve.jpg" alt="Thỏ đi làm về">
   </div>
+
+  <div id="introText"></div>
 
   <img id="cua" src="cua2.png" alt="Cửa mở">
   <img id="dora" src="chao.gif" alt="Doraemon chào">
@@ -178,6 +195,7 @@
     const scene = document.getElementById("scene");
     const hoitham = document.getElementById("hoitham");
     const extraButtons = document.getElementById("extraButtons");
+    const introText = document.getElementById("introText");
 
     function typeWriter(text, element, i, callback) {
       if (i < text.length) {
@@ -192,24 +210,30 @@
       nha.classList.add("show");
       tho.classList.add("show");
 
-      setTimeout(() => {
-        scene.style.display = "none";
-        cua.classList.add("show");
-
+      // Hiện dòng chữ đánh máy: "Teng teng tan làm ùi về thui"
+      introText.classList.add("show");
+      typeWriter("Teng teng tan làm ùi về thui", introText, 0, () => {
         setTimeout(() => {
-          cua.classList.remove("show");
-          dora.style.display = "block";
-          textEl.classList.add("show");
-          typeWriter(
-            "Xin chào Thảo, rất vui được gặp bạn. Tôi là mèo máy Doraemon được anh bạn kia gửi đến để làm bạn với cậu, cho tôi ở nhờ nhé.",
-            textEl,
-            0,
-            () => {
-              buttons.style.display = "block";
-            }
-          );
+          introText.classList.remove("show");
+          introText.style.display = "none";
+          scene.style.display = "none";
+          cua.classList.add("show");
+
+          setTimeout(() => {
+            cua.classList.remove("show");
+            dora.style.display = "block";
+            textEl.classList.add("show");
+            typeWriter(
+              "Xin chào Thảo, rất vui được gặp bạn. Tôi là mèo máy Doraemon được anh bạn kia gửi đến để làm bạn với cậu, cho tôi ở nhờ nhé.",
+              textEl,
+              0,
+              () => {
+                buttons.style.display = "block";
+              }
+            );
+          }, 2000);
         }, 2000);
-      }, 2000);
+      });
     }
 
     startSequence();
@@ -219,8 +243,8 @@
       textEl.classList.remove("show");
       buttons.style.display = "none";
 
-      dora.style.display = "none"; // Ẩn Doraemon chào
-      hoitham.style.display = "block"; // Hiện ảnh hoitham
+      dora.style.display = "none";
+      hoitham.style.display = "block";
 
       setTimeout(() => {
         textEl.innerHTML = "";
