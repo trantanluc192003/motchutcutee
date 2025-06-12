@@ -140,6 +140,14 @@
       animation: fly 2s ease-out forwards;
       pointer-events: none;
     }
+    .dish-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
 
     @keyframes fly {
       0% { opacity: 1; transform: translateY(0); }
@@ -169,8 +177,11 @@
   <img id="hoitham" src="hoitham.png" alt="Hỏi thăm">
   <img id="meodicho" src="meodicho.jpg" alt="Mèo đi chợ">
   <img id="nauan" src="nauan.jpeg" alt="Nấu ăn">
+  <div id="dishes" class="dish-container">
   <img id="chagio" src="chagio.jpg" alt="Chả giò">
   <img id="bokho" src="bokho.jpg" alt="Bò kho">
+  </div>
+
   <div id="xeo-container"></div>
 
   <script>
@@ -261,8 +272,8 @@
                           nauan.style.display = "none";
                           textEl.innerHTML = "";
                           typeWriter("Ta da, tớ đã nấu xong ùi. Hôm nay tớ nấu món bò kho và chả giò. Mời cậu thưởng thức nhé", textEl, 0);
-                          chagio.style.display = "inline-block";
-                          bokho.style.display = "inline-block";
+                          document.getElementById("dishes").style.display = "flex";
+
                         }, 5000);
                       });
                     }, 5000);
