@@ -17,7 +17,7 @@
       flex-direction: column;
       align-items: center;
       height: 100vh;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     .scene {
@@ -78,6 +78,7 @@
       opacity: 0;
       transition: opacity 1s ease;
       min-height: 80px;
+      text-align: center;
     }
 
     .text.show {
@@ -99,16 +100,6 @@
       cursor: pointer;
       transition: 0.3s;
     }
-    #nha {
-      max-height: 55vh;
-      max-width: 48%;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0px rgba(139, 195, 74, 0.5); }
-      50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(139, 195, 74, 0.8); }
-      100% { transform: scale(1); box-shadow: 0 0 0px rgba(139, 195, 74, 0.5); }
-    }
 
     #accept {
       background-color: #8bc34a;
@@ -122,12 +113,23 @@
       position: relative;
     }
 
-    #hoitham {
-      max-height: 70vh;
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0px rgba(139, 195, 74, 0.5); }
+      50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(139, 195, 74, 0.8); }
+      100% { transform: scale(1); box-shadow: 0 0 0px rgba(139, 195, 74, 0.5); }
+    }
+
+    #hoitham, #meodicho, #nauan, #chagio, #bokho {
       display: none;
+      max-height: 70vh;
       margin-top: 20px;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    #chagio, #bokho {
+      max-height: 50vh;
+      margin: 10px;
     }
 
     #intro-text {
@@ -161,17 +163,29 @@
     #openDoorBtn:hover {
       background-color: #ff4081;
     }
+
+    #xeo-container span {
+      position: absolute;
+      font-weight: bold;
+      color: #ff6f61;
+      animation: fly 2s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fly {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-100px) rotate(720deg); }
+    }
   </style>
 </head>
 <body>
 
   <div class="scene" id="scene">
-    <img id="nha" src="nha2.png" alt="Nhà thỏ">
-    <img id="tho" src="thodilamve.jpg" alt="Thỏ đi làm về">
+    <img id="nha" src="nha2.png" alt="Nhà thỏ" class="show">
+    <img id="tho" src="thodilamve.jpg" alt="Thỏ đi làm về" class="show">
   </div>
 
   <div id="intro-text"></div>
-
   <img id="cua" src="cua2.png" alt="Cửa mở">
   <button id="openDoorBtn">Ấn vào để mở cửa nè</button>
 
@@ -184,6 +198,11 @@
   </div>
 
   <img id="hoitham" src="hoitham.png" alt="Hỏi thăm">
+  <img id="meodicho" src="meodicho.jpg" alt="Mèo đi chợ">
+  <img id="nauan" src="nauan.jpeg" alt="Nấu ăn">
+  <img id="chagio" src="chagio.jpg" alt="Chả giò">
+  <img id="bokho" src="bokho.jpg" alt="Bò kho">
+  <div id="xeo-container"></div>
 
   <script>
     const textEl = document.getElementById("text");
@@ -196,20 +215,20 @@
     const hoitham = document.getElementById("hoitham");
     const introText = document.getElementById("intro-text");
     const openDoorBtn = document.getElementById("openDoorBtn");
+    const meodicho = document.getElementById("meodicho");
+    const nauan = document.getElementById("nauan");
+    const chagio = document.getElementById("chagio");
+    const bokho = document.getElementById("bokho");
+    const xeoContainer = document.getElementById("xeo-container");
 
     function typeWriter(text, element, i, callback) {
       if (i < text.length) {
         element.innerHTML = text.substring(0, i + 1);
         setTimeout(() => typeWriter(text, element, i + 1, callback), 40);
-      } else if (callback) {
-        callback();
-      }
+      } else if (callback) callback();
     }
 
     function startSequence() {
-      nha.classList.add("show");
-      tho.classList.add("show");
-
       setTimeout(() => {
         introText.classList.add("show");
         typeWriter("Teng teng tan làm ùi về nhà thuiii", introText, 0, () => {
@@ -228,14 +247,9 @@
       openDoorBtn.style.display = "none";
       dora.style.display = "block";
       textEl.classList.add("show");
-      typeWriter(
-        "Xin chào Thảo, rất vui được gặp bạn. Tôi là Mèo Ú được bạn kia gửi đến để làm bạn với cậu, cậu cho tớ ở nhờ nhé ^^.",
-        textEl,
-        0,
-        () => {
-          buttons.style.display = "block";
-        }
-      );
+      typeWriter("Xin chào Thảo, rất vui được gặp bạn. Tôi là Mèo Ú được bạn kia gửi đến để làm bạn với cậu, cậu cho tớ ở nhờ nhé ^^.", textEl, 0, () => {
+        buttons.style.display = "block";
+      });
     });
 
     document.getElementById("accept").addEventListener("click", () => {
@@ -253,28 +267,61 @@
             textEl.innerHTML = "";
             typeWriter("Hôm nay cậu đi làm về có mệt không ?", textEl, 0, () => {
               buttons.innerHTML = `
-                <button style="background-color: #f8bbd0; color: #880e4f; padding: 10px 20px; border: none; border-radius: 8px; font-size: 1em; cursor: pointer;">
-                  Có, Thỏ thấy hơi mệt
-                </button>
-                <button style="background-color: #f8bbd0; color: #880e4f; padding: 10px 20px; border: none; border-radius: 8px; font-size: 1em; cursor: pointer;">
-                  Không mệt tí nào
-                </button>
+                <button id="yesTired" style="background-color: #f8bbd0; color: #880e4f;">Có, Thỏ thấy hơi mệt</button>
+                <button onclick="alert('Thỏ giỏi quá!')" style="background-color: #f8bbd0; color: #880e4f;">Không mệt tí nào</button>
               `;
               buttons.style.display = "block";
+
+              document.getElementById("yesTired").addEventListener("click", () => {
+                buttons.style.display = "none";
+                textEl.classList.remove("show");
+                textEl.innerHTML = "";
+                hoitham.style.display = "none";
+                meodicho.style.display = "block";
+
+                typeWriter("Cậu vào nghỉ ngơi đi, để tớ đi chợ mua đồ nấu cho cậu ăn nhé", textEl, 0, () => {
+                  textEl.classList.add("show");
+                  setTimeout(() => {
+                    meodicho.style.display = "none";
+                    nauan.style.display = "block";
+                    textEl.innerHTML = "";
+                    typeWriter("Để tớ trổ tài nấu ăn cho cậu xem nè", textEl, 0, () => {
+                      spawnXeoEffect();
+                      setTimeout(() => {
+                        xeoContainer.innerHTML = "";
+                        nauan.style.display = "none";
+                        chagio.style.display = "inline-block";
+                        bokho.style.display = "inline-block";
+                        textEl.innerHTML = "";
+                        typeWriter("Ta da, tớ đã nấu xong ùi. Hôm nay tớ nấu món bò kho và chả giò. Mời cậu thưởng thức nhé", textEl, 0);
+                      }, 2000);
+                    });
+                  }, 3000);
+                });
+              });
             });
           }, 2000);
         });
       }, 1000);
     });
 
-    const declineBtn = document.getElementById("decline");
-    declineBtn.addEventListener("mouseover", () => {
+    document.getElementById("decline").addEventListener("mouseover", () => {
       const x = Math.floor(Math.random() * (window.innerWidth - 150));
       const y = Math.floor(Math.random() * (window.innerHeight - 100));
-      declineBtn.style.position = "absolute";
-      declineBtn.style.left = x + "px";
-      declineBtn.style.top = y + "px";
+      decline.style.position = "absolute";
+      decline.style.left = x + "px";
+      decline.style.top = y + "px";
     });
+
+    function spawnXeoEffect() {
+      for (let i = 0; i < 20; i++) {
+        const span = document.createElement("span");
+        span.textContent = "Xèo xèo";
+        span.style.left = Math.random() * window.innerWidth + "px";
+        span.style.top = Math.random() * window.innerHeight + "px";
+        xeoContainer.appendChild(span);
+      }
+    }
 
     startSequence();
   </script>
