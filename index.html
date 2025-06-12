@@ -335,6 +335,8 @@
       setTimeout(() => {
         typeWriter("Nè nè, cậu đi làm cả ngày mà không mệt á ! Đừng có lừa tuiii", textEl, 0, () => {
           document.getElementById("retry-container").style.display = "block";
+          document.getElementById("retry-btn").classList.add("blink");
+
         });
       }, 1000);
     }
