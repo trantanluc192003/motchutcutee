@@ -261,6 +261,8 @@
                 typeWriter("Cậu vào nghỉ ngơi đi, để tớ đi chợ mua đồ nấu cho cậu ăn nhé", textEl, 0, () => {
                   setTimeout(() => {
                     meodicho.style.display = "block";
+                    textEl.innerHTML = "";
+                    typeWriter("Trời ơi giấy nguyên liệu mà anh kia viết chữ xấu thế!", textEl, 0, () => {
                     setTimeout(() => {
                       meodicho.style.display = "none";
                       textEl.innerHTML = "";
@@ -278,6 +280,7 @@
 
                         }, 5000);
                       });
+                    }, 3000);
                     }, 5000);
                   }, 1000);
                 });
