@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Thăm Thảo</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -47,25 +45,20 @@
       transform: scale(1);
     }
 
-    #cua {
-      max-height: 65vh;
-      margin-top: 40px;
+    #cua { max-height: 65vh; margin-top: 40px; display: none; opacity: 0; transition: opacity 1s ease; }
+    #cua.show { display: block; opacity: 1; }
+
+    #dora, #hoitham, #meodicho, #nauan, #chagio, #bokho {
       display: none;
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-
-    #cua.show {
-      display: block;
-      opacity: 1;
-    }
-
-    #dora {
       max-height: 70vh;
-      display: none;
-      margin-top: 10px;
+      margin-top: 20px;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    #chagio, #bokho {
+      max-height: 50vh;
+      margin: 10px;
     }
 
     .text {
@@ -81,15 +74,9 @@
       text-align: center;
     }
 
-    .text.show {
-      display: block;
-      opacity: 1;
-    }
+    .text.show { display: block; opacity: 1; }
 
-    .buttons {
-      margin-top: 20px;
-      display: none;
-    }
+    .buttons { margin-top: 20px; display: none; }
 
     button {
       font-size: 1.2em;
@@ -119,19 +106,6 @@
       100% { transform: scale(1); box-shadow: 0 0 0px rgba(139, 195, 74, 0.5); }
     }
 
-    #hoitham, #meodicho, #nauan, #chagio, #bokho {
-      display: none;
-      max-height: 70vh;
-      margin-top: 20px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    }
-
-    #chagio, #bokho {
-      max-height: 50vh;
-      margin: 10px;
-    }
-
     #intro-text {
       font-size: 1.4em;
       color: #ff69b4;
@@ -142,10 +116,7 @@
       text-align: center;
     }
 
-    #intro-text.show {
-      display: block;
-      opacity: 1;
-    }
+    #intro-text.show { display: block; opacity: 1; }
 
     #openDoorBtn {
       display: none;
@@ -160,9 +131,7 @@
       transition: background-color 0.3s ease;
     }
 
-    #openDoorBtn:hover {
-      background-color: #ff4081;
-    }
+    #openDoorBtn:hover { background-color: #ff4081; }
 
     #xeo-container span {
       position: absolute;
@@ -274,29 +243,30 @@
 
               document.getElementById("yesTired").addEventListener("click", () => {
                 buttons.style.display = "none";
-                textEl.classList.remove("show");
                 textEl.innerHTML = "";
+                textEl.classList.add("show");
                 hoitham.style.display = "none";
-                meodicho.style.display = "block";
 
                 typeWriter("Cậu vào nghỉ ngơi đi, để tớ đi chợ mua đồ nấu cho cậu ăn nhé", textEl, 0, () => {
-                  textEl.classList.add("show");
                   setTimeout(() => {
-                    meodicho.style.display = "none";
-                    nauan.style.display = "block";
-                    textEl.innerHTML = "";
-                    typeWriter("Để tớ trổ tài nấu ăn cho cậu xem nè", textEl, 0, () => {
-                      spawnXeoEffect();
-                      setTimeout(() => {
-                        xeoContainer.innerHTML = "";
-                        nauan.style.display = "none";
-                        chagio.style.display = "inline-block";
-                        bokho.style.display = "inline-block";
-                        textEl.innerHTML = "";
-                        typeWriter("Ta da, tớ đã nấu xong ùi. Hôm nay tớ nấu món bò kho và chả giò. Mời cậu thưởng thức nhé", textEl, 0);
-                      }, 2000);
-                    });
-                  }, 3000);
+                    meodicho.style.display = "block";
+                    setTimeout(() => {
+                      meodicho.style.display = "none";
+                      textEl.innerHTML = "";
+                      typeWriter("Tớ đã mua nguyên liệu rồi, giờ thì để tớ trổ tài nấu ăn cho cậu xem nè", textEl, 0, () => {
+                        nauan.style.display = "block";
+                        spawnXeoEffect();
+                        setTimeout(() => {
+                          xeoContainer.innerHTML = "";
+                          nauan.style.display = "none";
+                          textEl.innerHTML = "";
+                          typeWriter("Ta da, tớ đã nấu xong ùi. Hôm nay tớ nấu món bò kho và chả giò. Mời cậu thưởng thức nhé", textEl, 0);
+                          chagio.style.display = "inline-block";
+                          bokho.style.display = "inline-block";
+                        }, 5000);
+                      });
+                    }, 5000);
+                  }, 1000);
                 });
               });
             });
