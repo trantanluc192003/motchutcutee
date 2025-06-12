@@ -177,9 +177,14 @@
   <img id="hoitham" src="hoitham.png" alt="Hỏi thăm">
   <img id="meodicho" src="meodicho.jpg" alt="Mèo đi chợ">
   <img id="nauan" src="nauan.jpeg" alt="Nấu ăn">
+  <img id="khoanhtay" src="khoanhtay.jpg" alt="Khoanh tay" style="display: none; max-height: 65vh; margin-top: 20px; border-radius: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+
   <div id="dishes" class="dish-container">
   <img id="chagio" src="chagio.jpg" alt="Chả giò">
   <img id="bokho" src="bokho.jpg" alt="Bò kho">
+  </div>
+  <div id="retry-container" style="display: none; margin-top: 20px;">
+  <button id="retry-btn" style="background-color: #ffcc80; color: #5d4037; padding: 10px 20px; border-radius: 8px; border: none; font-size: 1.1em; cursor: pointer;">Chọn lại đii</button>
   </div>
 
   <div id="xeo-container"></div>
@@ -248,7 +253,8 @@
             typeWriter("Hôm nay cậu đi làm về có mệt không ?", textEl, 0, () => {
               buttons.innerHTML = `
                 <button id="yesTired" style="background-color: #f8bbd0; color: #880e4f;">Có, Thỏ thấy hơi mệt</button>
-                <button onclick="alert('Thỏ giỏi quá!')" style="background-color: #f8bbd0; color: #880e4f;">Không mệt tí nào</button>
+               <button id="notTired" style="background-color: #f8bbd0; color: #880e4f;">Không mệt tí nào</button>
+
               `;
               buttons.style.display = "block";
 
@@ -289,6 +295,80 @@
           }, 2000);
         });
       }, 1000);
+    });
+    document.getElementById("notTired").addEventListener("click", () => {
+      buttons.style.display = "none";
+      hoitham.style.display = "none";
+      textEl.classList.remove("show");
+      textEl.innerHTML = "";
+
+      // Hiện ảnh khoanh tay
+      const khoanhtay = document.getElementById("khoanhtay");
+      khoanhtay.style.display = "block";
+
+      setTimeout(() => {
+        textEl.innerHTML = "";
+        textEl.classList.add("show");
+        typeWriter("Nè nè, đi làm cả ngày mà không mệt á ! Đừng có lừa tuiii", textEl, 0, () => {
+          document.getElementById("retry-container").style.display = "block";
+        });
+      }, 3000);
+    });
+
+    document.getElementById("retry-btn").addEventListener("click", () => {
+      // Ẩn mọi thứ
+      document.getElementById("retry-container").style.display = "none";
+      document.getElementById("khoanhtay").style.display = "none";
+      textEl.innerHTML = "";
+      textEl.classList.add("show");
+
+      // Hiện lại lựa chọn mệt/không mệt
+      typeWriter("Hôm nay cậu đi làm về có mệt không ?", textEl, 0, () => {
+        buttons.innerHTML = `
+          <button id="yesTired" style="background-color: #f8bbd0; color: #880e4f;">Có, Thỏ thấy hơi mệt</button>
+          <button id="notTired" style="background-color: #f8bbd0; color: #880e4f;">Không mệt tí nào</button>
+        `;
+        buttons.style.display = "block";
+
+        // Gắn lại event listener sau khi DOM được gắn lại
+        document.getElementById("yesTired").addEventListener("click", () => {
+          buttons.style.display = "none";
+          textEl.innerHTML = "";
+          textEl.classList.add("show");
+          hoitham.style.display = "none";
+
+          typeWriter("Cậu vào nghỉ ngơi đi, để tớ đi chợ mua đồ nấu cho cậu ăn nhé", textEl, 0, () => {
+            setTimeout(() => {
+              meodicho.style.display = "block";
+              textEl.innerHTML = "";
+              typeWriter("Trời ơi giấy nguyên liệu mà anh kia viết chữ xấu thế!", textEl, 0, () => {
+                setTimeout(() => {
+                  meodicho.style.display = "none";
+                  textEl.innerHTML = "";
+                  typeWriter("Tớ đã mua nguyên liệu rồi, giờ thì để tớ trổ tài nấu ăn cho cậu xem nè", textEl, 0, () => {
+                    nauan.style.display = "block";
+                    spawnXeoEffect();
+                    setTimeout(() => {
+                      xeoContainer.innerHTML = "";
+                      nauan.style.display = "none";
+                      textEl.innerHTML = "";
+                      typeWriter("Ta da, tớ đã nấu xong ùi. Hôm nay tớ nấu món bò kho và chả giò. Mời cậu thưởng thức nhé", textEl, 0);
+                      document.getElementById("dishes").style.display = "flex";
+                      chagio.style.display = "inline-block";
+                      bokho.style.display = "inline-block";
+                    }, 5000);
+                  });
+                }, 3000);
+              });
+            }, 1000);
+          });
+        });
+
+        document.getElementById("notTired").addEventListener("click", () => {
+          // Gọi lại chính đoạn này (đệ quy nhẹ)
+          document.getElementById("notTired").click();
+        });
+      });
     });
 
     document.getElementById("decline").addEventListener("mouseover", () => {
