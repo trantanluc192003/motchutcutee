@@ -180,8 +180,8 @@
   <img id="khoanhtay" src="khoanhtay.jpg" alt="Khoanh tay" style="display: none; max-height: 65vh; margin-top: 20px; border-radius: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.2);">
 
   <div id="dishes" class="dish-container">
-  <img id="chagio" src="chagio.jpg" alt="Chả giò">
-  <img id="bokho" src="bokho.jpg" alt="Bò kho">
+  <img id="chagio" src="chagio.jpg" alt="Chả giò" style="display: none;">
+  <img id="bokho" src="bokho.jpg" alt="Bò kho"style="display: none;">
   </div>
   <div id="retry-container" style="display: none; margin-top: 20px;">
   <button id="retry-btn" style="background-color: #ffcc80; color: #5d4037; padding: 10px 20px; border-radius: 8px; border: none; font-size: 1.1em; cursor: pointer;">Chọn lại đii</button>
@@ -236,6 +236,23 @@
         buttons.style.display = "block";
       });
     });
+    function handleNotTired() {
+      buttons.style.display = "none";
+      hoitham.style.display = "none";
+      textEl.classList.remove("show");
+      textEl.innerHTML = "";
+
+      const khoanhtay = document.getElementById("khoanhtay");
+      khoanhtay.style.display = "block";
+
+      setTimeout(() => {
+        textEl.innerHTML = "";
+        textEl.classList.add("show");
+        typeWriter("Nè nè, đi làm cả ngày mà không mệt á ! Đừng có lừa tuiii", textEl, 0, () => {
+          document.getElementById("retry-container").style.display = "block";
+        });
+      }, 3000);
+    }
 
     document.getElementById("accept").addEventListener("click", () => {
       document.querySelectorAll("img").forEach(img => img.classList.remove("show"));
@@ -296,24 +313,8 @@
         });
       }, 1000);
     });
-    document.getElementById("notTired").addEventListener("click", () => {
-      buttons.style.display = "none";
-      hoitham.style.display = "none";
-      textEl.classList.remove("show");
-      textEl.innerHTML = "";
+    document.getElementById("notTired").addEventListener("click", handleNotTired);
 
-      // Hiện ảnh khoanh tay
-      const khoanhtay = document.getElementById("khoanhtay");
-      khoanhtay.style.display = "block";
-
-      setTimeout(() => {
-        textEl.innerHTML = "";
-        textEl.classList.add("show");
-        typeWriter("Nè nè, đi làm cả ngày mà không mệt á ! Đừng có lừa tuiii", textEl, 0, () => {
-          document.getElementById("retry-container").style.display = "block";
-        });
-      }, 3000);
-    });
 
     document.getElementById("retry-btn").addEventListener("click", () => {
       // Ẩn mọi thứ
@@ -363,11 +364,7 @@
             }, 1000);
           });
         });
-
-        document.getElementById("notTired").addEventListener("click", () => {
-          // Gọi lại chính đoạn này (đệ quy nhẹ)
-          document.getElementById("notTired").click();
-        });
+        document.getElementById("notTired").addEventListener("click", handleNotTired);
       });
     });
 
