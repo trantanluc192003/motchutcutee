@@ -26,14 +26,13 @@
       align-items: center;
       width: 100%;
       max-width: 1000px;
-      height: 65vh;
+      height: 60vh;
       padding: 0 40px;
-      margin-top: auto;
-      margin-bottom: auto;
+      margin-top: 20px;
     }
 
     .scene img {
-      max-height: 60vh;
+      max-height: 55vh;
       width: auto;
       max-width: 48%;
       border-radius: 20px;
@@ -50,8 +49,7 @@
 
     #cua {
       max-height: 65vh;
-      margin-top: auto;
-      margin-bottom: auto;
+      margin-top: 40px;
       display: none;
       opacity: 0;
       transition: opacity 1s ease;
@@ -70,14 +68,6 @@
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
     }
 
-    #hoitham {
-      max-height: 70vh;
-      display: none;
-      margin-top: 20px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    }
-
     .text {
       font-size: 1.6em;
       margin-top: 20px;
@@ -88,7 +78,6 @@
       opacity: 0;
       transition: opacity 1s ease;
       min-height: 80px;
-      text-align: center;
     }
 
     .text.show {
@@ -129,38 +118,44 @@
       position: relative;
     }
 
-    #intro-text {
-      font-size: 1.8em;
+    #hoitham {
+      max-height: 70vh;
+      display: none;
       margin-top: 20px;
-      margin-bottom: 30px; /* Thêm khoảng cách với đáy */
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    #intro-text {
+      font-size: 1.4em;
       color: #ff69b4;
-      text-align: center;
+      margin-top: 30px;
       display: none;
       opacity: 0;
       transition: opacity 1s ease;
-      position: relative;
-      bottom: 0;
+      text-align: center;
     }
-
 
     #intro-text.show {
       display: block;
       opacity: 1;
     }
 
-    #cuabutton {
-      display: none;
-      margin-top: 20px;
-    }
-
     #openDoorBtn {
-      font-size: 1.3em;
-      padding: 12px 24px;
-      border-radius: 10px;
-      background-color: #ff69b4;
+      display: none;
+      margin-top: 30px;
+      font-size: 1.2em;
+      padding: 12px 25px;
+      background-color: #ff80ab;
       color: white;
       border: none;
+      border-radius: 10px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #openDoorBtn:hover {
+      background-color: #ff4081;
     }
   </style>
 </head>
@@ -170,12 +165,11 @@
     <img id="nha" src="nha.png" alt="Nhà thỏ">
     <img id="tho" src="thodilamve.jpg" alt="Thỏ đi làm về">
   </div>
-  <div id="intro-text"></div> <!-- Dòng chữ vẫn dưới ảnh -->
-  <img id="cua" src="cua2.png" alt="Cửa mở">
 
-  <div id="cuabutton">
-    <button id="openDoorBtn">Ấn để mở cửa</button>
-  </div>
+  <div id="intro-text"></div>
+
+  <img id="cua" src="cua2.png" alt="Cửa mở">
+  <button id="openDoorBtn">Ấn để mở cửa</button>
 
   <img id="dora" src="chao.gif" alt="Doraemon chào">
   <div class="text" id="text"></div>
@@ -185,7 +179,7 @@
     <button id="decline">Không nhé</button>
   </div>
 
-  <img id="hoitham" src="hoitham.webp" alt="Hỏi thăm">
+  <img id="hoitham" src="hoitham.png" alt="Hỏi thăm">
 
   <script>
     const textEl = document.getElementById("text");
@@ -197,7 +191,6 @@
     const scene = document.getElementById("scene");
     const hoitham = document.getElementById("hoitham");
     const introText = document.getElementById("intro-text");
-    const cuabutton = document.getElementById("cuabutton");
     const openDoorBtn = document.getElementById("openDoorBtn");
 
     function typeWriter(text, element, i, callback) {
@@ -220,17 +213,15 @@
             scene.style.display = "none";
             introText.style.display = "none";
             cua.classList.add("show");
-            cuabutton.style.display = "block";
+            openDoorBtn.style.display = "block";
           }, 2000);
         });
       }, 1500);
     }
 
-    startSequence();
-
     openDoorBtn.addEventListener("click", () => {
       cua.classList.remove("show");
-      cuabutton.style.display = "none";
+      openDoorBtn.style.display = "none";
       dora.style.display = "block";
       textEl.classList.add("show");
       typeWriter(
@@ -276,6 +267,8 @@
       declineBtn.style.left = x + "px";
       declineBtn.style.top = y + "px";
     });
+
+    startSequence();
   </script>
 </body>
 </html>
