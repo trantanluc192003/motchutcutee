@@ -142,6 +142,15 @@
 
     #openDoorBtn:hover { background-color: #ff4081; }
 
+    #no-btn {
+      position: relative;
+    }
+
+    #no-btn.move {
+      transform: translateX(100px);
+      transition: transform 0.2s ease;
+    }
+
     #xeo-container span {
       position: absolute;
       font-weight: bold;
@@ -169,6 +178,11 @@
   <div class="scene" id="scene">
     <img id="nha" src="nha2.png" alt="Nhà thỏ" class="show">
     <img id="tho" src="thodilamve.jpg" alt="Thỏ đi làm về" class="show">
+  </div>
+  <div id="review-container" style="display:none; text-align: center; margin-top: 20px;">
+    <p id="review-question" style="font-size: 1.3em; font-weight: bold;"></p>
+    <button id="yes-btn" style="font-size: 1.2em; margin: 10px; padding: 10px 20px; background-color: #aed581; border: none; border-radius: 8px;">Ngon nha ngon nha</button>
+    <button id="no-btn" style="font-size: 1.2em; margin: 10px; padding: 10px 20px; background-color: #e57373; border: none; border-radius: 8px; position: relative;">Chê chê</button>
   </div>
 
   <div id="intro-text"></div>
@@ -292,7 +306,24 @@
                           document.getElementById("dishes").style.display = "flex";
                           chagio.style.display = "inline-block";
                           bokho.style.display = "inline-block";
+                          setTimeout(() => {
+                            document.getElementById("review-container").style.display = "block";
+                            document.getElementById("review-question").innerText = "Thỏ thấy 2 món tui nấu có ngon hemm?";
+                          }, 3000);
 
+                          // Né chuột nút "Chê chê"
+                          const noBtn = document.getElementById("no-btn");
+                          noBtn.addEventListener("mouseenter", () => {
+                            const container = document.getElementById("review-container");
+                            const maxX = container.clientWidth - noBtn.clientWidth;
+                            const maxY = 40;
+                            const randX = Math.floor(Math.random() * maxX) - maxX / 2;
+                            const randY = Math.floor(Math.random() * maxY) - maxY / 2;
+
+                            noBtn.style.position = "relative";
+                            noBtn.style.transform = `translate(${randX}px, ${randY}px)`;
+                          });
+                          document.getElementById("yes-btn").classList.add("blink");
                         }, 5000);
                       });
                     }, 3000);
