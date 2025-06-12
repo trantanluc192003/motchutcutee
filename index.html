@@ -251,10 +251,14 @@
         typeWriter("Tớ biết là cậu sẽ chấp nhận cho tớ ở nhờ mà hihi", textEl, 0, () => {
           setTimeout(() => {
             textEl.innerHTML = "";
-            typeWriter("Hôm nay cậu đi làm về có mệt không", textEl, 0, () => {
+            typeWriter("Hôm nay cậu đi làm về có mệt không ?", textEl, 0, () => {
               buttons.innerHTML = `
-                <button onclick="alert('Thỏ nhớ nghỉ ngơi nhé!')">Có, Thỏ thấy hơi mệt</button>
-                <button onclick="alert('Thỏ giỏi quá!')">Không mệt tí nào</button>
+                <button style="background-color: #f8bbd0; color: #880e4f; padding: 10px 20px; border: none; border-radius: 8px; font-size: 1em; cursor: pointer;">
+                  Có, Thỏ thấy hơi mệt
+                </button>
+                <button style="background-color: #f8bbd0; color: #880e4f; padding: 10px 20px; border: none; border-radius: 8px; font-size: 1em; cursor: pointer;">
+                  Không mệt tí nào
+                </button>
               `;
               buttons.style.display = "block";
             });
