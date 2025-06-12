@@ -18,7 +18,6 @@
       align-items: center;
       height: 100vh;
       overflow: hidden;
-      position: relative;
     }
 
     .scene {
@@ -29,12 +28,11 @@
       max-width: 1000px;
       height: 60vh;
       padding: 0 40px;
-      margin-top: auto;
-      margin-bottom: auto;
+      margin-top: 20px;
     }
 
     .scene img {
-      max-height: 70vh; /* ✅ tăng kích thước ảnh */
+      max-height: 55vh;
       width: auto;
       max-width: 48%;
       border-radius: 20px;
@@ -51,6 +49,7 @@
 
     #cua {
       max-height: 65vh;
+      margin-top: 40px;
       display: none;
       opacity: 0;
       transition: opacity 1s ease;
@@ -79,7 +78,6 @@
       opacity: 0;
       transition: opacity 1s ease;
       min-height: 80px;
-      text-align: center;
     }
 
     .text.show {
@@ -123,37 +121,22 @@
     #hoitham {
       max-height: 70vh;
       display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      margin-top: 20px;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      z-index: 10;
     }
 
-    #extraButtons {
-      margin-top: 20px;
-      display: none;
-    }
-
-    #extraButtons button {
-      background-color: #ffb74d;
-      color: white;
-    }
-
-    #introText {
-      font-size: 1.8em;
-      color: #ff4081;
-      margin-top: 20px;
-      margin-bottom: 30px; /* ✅ đẩy chữ lên cao hơn */
+    #intro-text, #cuatext {
+      font-size: 1.4em;
+      color: #ff69b4;
+      margin-top: 30px;
       display: none;
       opacity: 0;
       transition: opacity 1s ease;
       text-align: center;
     }
 
-    #introText.show {
+    #intro-text.show, #cuatext.show {
       display: block;
       opacity: 1;
     }
@@ -166,9 +149,11 @@
     <img id="tho" src="thodilamve.jpg" alt="Thỏ đi làm về">
   </div>
 
-  <div id="introText"></div>
+  <div id="intro-text"></div>
 
   <img id="cua" src="cua2.png" alt="Cửa mở">
+  <div id="cuatext"></div>
+
   <img id="dora" src="chao.gif" alt="Doraemon chào">
   <div class="text" id="text"></div>
 
@@ -179,11 +164,6 @@
 
   <img id="hoitham" src="hoitham.png" alt="Hỏi thăm">
 
-  <div class="buttons" id="extraButtons">
-    <button>Có, Thỏ thấy hơi mệt</button>
-    <button>Không mệt tí nào</button>
-  </div>
-
   <script>
     const textEl = document.getElementById("text");
     const dora = document.getElementById("dora");
@@ -193,8 +173,8 @@
     const cua = document.getElementById("cua");
     const scene = document.getElementById("scene");
     const hoitham = document.getElementById("hoitham");
-    const extraButtons = document.getElementById("extraButtons");
-    const introText = document.getElementById("introText");
+    const introText = document.getElementById("intro-text");
+    const cuatext = document.getElementById("cuatext");
 
     function typeWriter(text, element, i, callback) {
       if (i < text.length) {
@@ -209,30 +189,38 @@
       nha.classList.add("show");
       tho.classList.add("show");
 
-      // Hiện dòng chữ đánh máy: "Teng teng tan làm ùi về thui"
-      introText.classList.add("show");
-      typeWriter("Teng teng tan làm ùi về thui", introText, 0, () => {
-        setTimeout(() => {
-          introText.classList.remove("show");
-          introText.style.display = "none";
-          scene.style.display = "none";
-          cua.classList.add("show");
-
+      // Dòng chữ intro khi thỏ về nhà
+      setTimeout(() => {
+        introText.classList.add("show");
+        typeWriter("Teng teng tan làm ùi về thui", introText, 0, () => {
+          // Ẩn scene, hiện cửa sau 2s
           setTimeout(() => {
-            cua.classList.remove("show");
-            dora.style.display = "block";
-            textEl.classList.add("show");
-            typeWriter(
-              "Xin chào Thảo, rất vui được gặp bạn. Tôi là mèo máy Doraemon được anh bạn kia gửi đến để làm bạn với cậu, cho tôi ở nhờ nhé.",
-              textEl,
-              0,
-              () => {
-                buttons.style.display = "block";
-              }
-            );
+            scene.style.display = "none";
+            introText.style.display = "none";
+            cua.classList.add("show");
+
+            // Hiện dòng chữ "Vào nhà thuii"
+            cuatext.classList.add("show");
+            typeWriter("Vào nhà thuii", cuatext, 0, () => {
+              // Sau 2s hiện Doraemon
+              setTimeout(() => {
+                cua.classList.remove("show");
+                cuatext.classList.remove("show");
+                dora.style.display = "block";
+                textEl.classList.add("show");
+                typeWriter(
+                  "Xin chào Thảo, rất vui được gặp bạn. Tôi là mèo máy Doraemon được anh bạn kia gửi đến để làm bạn với cậu, cho tôi ở nhờ nhé.",
+                  textEl,
+                  0,
+                  () => {
+                    buttons.style.display = "block";
+                  }
+                );
+              }, 2000);
+            });
           }, 2000);
-        }, 2000);
-      });
+        });
+      }, 1500);
     }
 
     startSequence();
@@ -241,7 +229,6 @@
       document.querySelectorAll("img").forEach(img => img.classList.remove("show"));
       textEl.classList.remove("show");
       buttons.style.display = "none";
-
       dora.style.display = "none";
       hoitham.style.display = "block";
 
@@ -252,11 +239,15 @@
           setTimeout(() => {
             textEl.innerHTML = "";
             typeWriter("Hôm nay cậu đi làm về có mệt không", textEl, 0, () => {
-              extraButtons.style.display = "flex";
+              buttons.innerHTML = `
+                <button onclick="alert('Thỏ nhớ nghỉ ngơi nhé!')">Có, Thỏ thấy hơi mệt</button>
+                <button onclick="alert('Thỏ giỏi quá!')">Không mệt tí nào</button>
+              `;
+              buttons.style.display = "block";
             });
           }, 2000);
         });
-      }, 500);
+      }, 1000);
     });
 
     const declineBtn = document.getElementById("decline");
