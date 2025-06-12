@@ -105,6 +105,15 @@
       50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(139, 195, 74, 0.8); }
       100% { transform: scale(1); box-shadow: 0 0 0px rgba(139, 195, 74, 0.5); }
     }
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    #openDoorBtn.blink {
+      animation: blink 1s infinite;
+    }
 
     #intro-text {
       font-size: 1.4em;
@@ -222,6 +231,7 @@
             introText.style.display = "none";
             cua.classList.add("show");
             openDoorBtn.style.display = "block";
+            openDoorBtn.classList.add("blink");
           }, 2000);
         });
       }, 1500);
@@ -326,7 +336,7 @@
         typeWriter("Nè nè, cậu đi làm cả ngày mà không mệt á ! Đừng có lừa tuiii", textEl, 0, () => {
           document.getElementById("retry-container").style.display = "block";
         });
-      }, 3000);
+      }, 1000);
     }
 
     document.getElementById("retry-btn").addEventListener("click", () => {
