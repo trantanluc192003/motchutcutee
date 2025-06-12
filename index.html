@@ -200,13 +200,13 @@
   <img id="hoitham" src="hoitham.png" alt="Hỏi thăm">
   <img id="meodicho" src="meodicho.jpeg" alt="Mèo đi chợ">
   <img id="nauan" src="nauan.jpeg" alt="Nấu ăn">
-  
+
   <div id="dishes" class="dish-container">
   <img id="chagio" src="chagio.jpg" alt="Chả giò">
   <img id="bokho" src="bokho.jpg" alt="Bò kho">
   </div>
   
-  <img id="xucdong" src="cute.gif" style="display: none; width: 200px; margin: 20px auto;" />
+  <img id="xucdong" src="cute.gif" style="display: none; width: 450px; margin: 20px auto;" />
   <img id="khoanhtay" src="khoanhtay.jpg" alt="Không chấp nhận" style="display:none; max-height: 60vh; margin-top: 20px;">
   <div id="retry-container" style="display:none; text-align: center;">
     <button id="retry-btn" style="font-size: 1.2em; margin-top: 20px; padding: 10px 20px; background-color: #ffd54f; border: none; border-radius: 8px;">Ấn vào đây để chọn lại nè !</button>
@@ -333,7 +333,9 @@
 
                             // Ẩn review
                             document.getElementById("review-container").style.display = "none";
-
+                              // ✅ Dọn dòng chữ cũ NGAY LẬP TỨC
+                            textEl.innerHTML = "";
+                            textEl.classList.remove("show")
                             // Hiện ảnh cute
                             document.getElementById("xucdong").style.display = "block";
 
