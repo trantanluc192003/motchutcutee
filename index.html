@@ -131,13 +131,17 @@
 
     #intro-text {
       font-size: 1.8em;
-      margin-bottom: 25px;
+      margin-top: 20px;
+      margin-bottom: 30px; /* Thêm khoảng cách với đáy */
       color: #ff69b4;
       text-align: center;
       display: none;
       opacity: 0;
       transition: opacity 1s ease;
+      position: relative;
+      bottom: 0;
     }
+
 
     #intro-text.show {
       display: block;
@@ -162,13 +166,11 @@
 </head>
 <body>
 
-  <div id="intro-text"></div>
-
   <div class="scene" id="scene">
-    <img id="nha" src="nha.jpg" alt="Nhà thỏ">
+    <img id="nha" src="nha.png" alt="Nhà thỏ">
     <img id="tho" src="thodilamve.jpg" alt="Thỏ đi làm về">
   </div>
-
+  <div id="intro-text"></div> <!-- Dòng chữ vẫn dưới ảnh -->
   <img id="cua" src="cua2.png" alt="Cửa mở">
 
   <div id="cuabutton">
