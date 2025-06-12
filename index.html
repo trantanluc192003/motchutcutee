@@ -263,6 +263,41 @@
         buttons.style.display = "block";
       });
     });
+    function handleReviewAfterDishes() {
+      setTimeout(() => {
+        document.getElementById("review-container").style.display = "block";
+        document.getElementById("review-question").innerText = "Thỏ thấy 2 món tui nấu có ngon hemm?";
+
+        const noBtn = document.getElementById("no-btn");
+        noBtn.addEventListener("mouseover", () => {
+          const x = Math.min(Math.random() * (window.innerWidth - 150), window.innerWidth - 150);
+          const y = Math.min(Math.random() * (window.innerHeight - 100), window.innerHeight - 100);
+          noBtn.style.position = "absolute";
+          noBtn.style.left = x + "px";
+          noBtn.style.top = y + "px";
+          noBtn.style.transition = "all 0.3s ease";
+        });
+
+        document.getElementById("yes-btn").classList.add("blink");
+
+        document.getElementById("yes-btn").addEventListener("click", () => {
+          // Ẩn món ăn + review
+          document.getElementById("dishes").style.display = "none";
+          document.getElementById("chagio").style.display = "none";
+          document.getElementById("bokho").style.display = "none";
+          document.getElementById("review-container").style.display = "none";
+
+          // Hiện ảnh xúc động
+          document.getElementById("xucdong").style.display = "block";
+          textEl.innerHTML = "";
+
+          setTimeout(() => {
+            textEl.classList.add("show");
+            typeWriter("Trời ơi, lần đầu tớ nấu món này mà được Thỏ khen, xúc động quá huhu", textEl, 0);
+          }, 1000);
+        });
+      }, 3000);
+    }
 
     document.getElementById("accept").addEventListener("click", () => {
       document.querySelectorAll("img").forEach(img => img.classList.remove("show"));
@@ -309,43 +344,7 @@
                           document.getElementById("dishes").style.display = "flex";
                           chagio.style.display = "inline-block";
                           bokho.style.display = "inline-block";
-                          setTimeout(() => {
-                            document.getElementById("review-container").style.display = "block";
-                            document.getElementById("review-question").innerText = "Thỏ thấy 2 món tui nấu có ngon hemm?";
-                          }, 6000);
-
-                          // Né chuột nút "Chê chê"
-                          const noBtn = document.getElementById("no-btn");
-                          noBtn.addEventListener("mouseover", () => {
-                            const x = Math.min(Math.random() * (window.innerWidth - 150), window.innerWidth - 150);
-                            const y = Math.min(Math.random() * (window.innerHeight - 100), window.innerHeight - 100);
-                            noBtn.style.position = "absolute";
-                            noBtn.style.left = x + "px";
-                            noBtn.style.top = y + "px";
-                            noBtn.style.transition = "all 0.3s ease";
-                          });
-                          document.getElementById("yes-btn").classList.add("blink");
-                          document.getElementById("yes-btn").addEventListener("click", () => {
-                            // Ẩn các món ăn
-                            document.getElementById("dishes").style.display = "none";
-                            document.getElementById("chagio").style.display = "none";
-                            document.getElementById("bokho").style.display = "none";
-
-                            // Ẩn review
-                            document.getElementById("review-container").style.display = "none";
-                              // ✅ Dọn dòng chữ cũ NGAY LẬP TỨC
-                            textEl.innerHTML = "";
-                            textEl.classList.remove("show")
-                            // Hiện ảnh cute
-                            document.getElementById("xucdong").style.display = "block";
-
-                            // Hiện dòng chữ sau 1 giây
-                            setTimeout(() => {
-                              textEl.innerHTML = "";
-                              textEl.classList.add("show");
-                              typeWriter("Trời ơi, lần đầu tớ nấu món này mà được Thỏ khen, xúc động quá huhu", textEl, 0);
-                            }, 1000);
-                          });
+                          handleReviewAfterDishes();
                         }, 5000);
                       });
                     }, 3000);
