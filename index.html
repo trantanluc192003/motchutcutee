@@ -299,7 +299,7 @@
       }, 3000);
     }
     function addAdditionalScene(){
-        // Tạo nút "Continue"
+        // Tạo nút Continue
         let continueBtn = document.createElement("button");
 
         continueBtn.textContent = "Continue";
@@ -321,14 +321,15 @@
         document.body.appendChild(continueBtn);
 
         continueBtn.onclick = function(){
-            // Ẩn ảnh xucdong.gif
+            // Ẩn ảnh xucdong.gif nếu có
             document.querySelector("#xucdong")?.remove();
-
-            // Ẩn dòng chữ
-            document.querySelector("#xucdong-text")?.remove();
 
             // Ẩn nút Continue
             continueBtn.remove();
+
+            // Xóa dòng "Trời ơi…" tại textEl
+            textEl.innerHTML = ""; 
+            textEl.classList.remove("show");
 
             // Hiện ảnh docsach.jpg
             let docsach = document.createElement("img");
@@ -347,7 +348,7 @@
 
             document.body.appendChild(docsach);
 
-            // Sau 2s, hiện ảnh timbaoboi.webp cùng dòng thoại
+            // Sau 2s, hiện ảnh timbaoboi.webp với dòng thoại
             setTimeout(function(){
                 let timbaoboi = document.createElement("img");
 
@@ -365,36 +366,20 @@
 
                 document.body.appendChild(timbaoboi);
 
-                let text = document.createElement("div");
+                // Hiện dòng thoại
+                textEl.innerHTML = ""; 
+                textEl.classList.add("show");
 
-                text.id = "timbaoboi-text";
+                typeWriter("Cậu học bài à, để tớ tìm gì đó giúp cậu nha", textEl, 0);
 
-                text.textContent = "Cậu học bài à, để tớ tìm gì đó giúp cậu nha";
-
-                text.style.position = "fixed";
-
-                text.style.bottom = "100px";
-
-                text.style.right = "20px";
-
-                text.style.zIndex = "100";
-
-                text.style.padding = "10px";
-
-                text.style.background = "rgba(0,0,0,0.7)";
-
-                text.style.color = "white";
-
-                text.style.borderRadius = "10px";
-
-                document.body.appendChild(text);
-
-                // Sau 3s, ẩn ảnh timbaoboi.webp & dòng thoại
+                // Sau 3s, ẩn ảnh timbaoboi.webp
                 setTimeout(function(){
                     timbaoboi.remove();
-                    text.remove();
 
-                    // Hiện ảnh banhmi.webp cùng dòng "Đây ròiii"
+                    textEl.innerHTML = ""; 
+                    textEl.classList.remove("show");
+
+                    // Hiện ảnh banhmi.webp
                     let banhmi = document.createElement("img");
 
                     banhmi.id = "banhmi";
@@ -411,33 +396,16 @@
 
                     document.body.appendChild(banhmi);
 
-                    let textBanhMi = document.createElement("div");
+                    // Hiện dòng "Đây ròiii"
+                    textEl.innerHTML = ""; 
+                    textEl.classList.add("show");
 
-                    textBanhMi.id = "banhmi-text";
-
-                    textBanhMi.textContent = "Đây ròiii";
-
-                    textBanhMi.style.position = "fixed";
-
-                    textBanhMi.style.bottom = "100px";
-
-                    textBanhMi.style.right = "20px";
-
-                    textBanhMi.style.zIndex = "100";
-
-                    textBanhMi.style.padding = "10px";
-
-                    textBanhMi.style.background = "rgba(0,0,0,0.7)";
-
-                    textBanhMi.style.color = "white";
-
-                    textBanhMi.style.borderRadius = "10px";
-
-                    document.body.appendChild(textBanhMi);
-                }, 5000);
+                    typeWriter("Đây ròiii", textEl, 0);
+                }, 3000);
             }, 2000);
         };
     }
+
 
     document.getElementById("accept").addEventListener("click", () => {
       document.querySelectorAll("img").forEach(img => img.classList.remove("show"));
