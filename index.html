@@ -300,9 +300,11 @@
     }
     function addAdditionalScene(){
         // Tạo nút "Continue"
+        textEl.innerHTML = ""; // xóa nội dung trước khi thêm tiếp
+        textEl.classList.remove("show"); // nếu có thêm class show
         let continueBtn = document.createElement("button");
 
-        continueBtn.textContent = "Continue";
+        continueBtn.textContent = "Ấn vào đây để tiếp tục nè";
 
         continueBtn.style.position = "fixed";
 
@@ -434,7 +436,7 @@
                     textBanhMi.style.borderRadius = "10px";
 
                     document.body.appendChild(textBanhMi);
-                }, 3000);
+                }, 5000);
             }, 2000);
         };
     }
