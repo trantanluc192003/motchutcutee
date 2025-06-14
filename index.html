@@ -176,8 +176,8 @@
 <body>
 
   <div class="scene" id="scene">
-    <img id="nha" src="nha2.png" alt="Nhà thỏ" class="show">
-    <img id="tho" src="thodilamve.jpg" alt="Thỏ đi làm về" class="show">
+    <img id="nha" src="nha2.png" alt="Nhà Thảo" class="show">
+    <img id="tho" src="thodilamve.jpg" alt="Thảo đi làm về" class="show">
   </div>
   <div id="review-container" style="display:none; text-align: center; margin-top: 20px;">
     <p id="review-question" style="font-size: 1.3em; font-weight: bold;"></p>
@@ -266,7 +266,7 @@
     function handleReviewAfterDishes() {
       setTimeout(() => {
         document.getElementById("review-container").style.display = "block";
-        document.getElementById("review-question").innerText = "Thỏ thấy 2 món tui nấu có ngon hemm?";
+        document.getElementById("review-question").innerText = "Thảo thấy 2 món tui nấu có ngon hemm?";
 
         const noBtn = document.getElementById("no-btn");
         noBtn.addEventListener("mouseover", () => {
@@ -293,7 +293,7 @@
 
           setTimeout(() => {
             textEl.classList.add("show");
-            typeWriter("Trời ơi, lần đầu tớ nấu món này mà được Thỏ khen, tớ xúc động quá huhu🥹🥹", textEl, 0);
+            typeWriter("Trời ơi, lần đầu tớ nấu món này mà được Thảo khen, tớ xúc động quá huhu🥹🥹", textEl, 0);
           }, 2000);
           addAdditionalScene();
         });
@@ -440,13 +440,13 @@
 
                         document.body.appendChild(clock);
 
-                        // Sau 5s, hiện dòng "Muộn rồi nè, Thỏ đi nghỉ ngơi đi nhé"
+                        // Sau 5s, hiện dòng "Muộn rồi nè, Thảo đi nghỉ ngơi đi nhé"
                         setTimeout(function(){
                             textEl.innerHTML = ""; 
                             textEl.classList.add("show");
 
                             setTimeout(function(){
-                                typeWriter("Muộn rồi nè, Thỏ đi nghỉ ngơi đi nhé", textEl, 0);
+                                typeWriter("Muộn rồi nè, Thảo đi nghỉ ngơi đi nhé", textEl, 0);
                             }, 500);
 
                             // Sau 5s, ẩn ảnh clock + dòng "Muộn rồi…" 
@@ -492,13 +492,13 @@
                                 chuanbingu.style.height = "500px";
                                 document.body.appendChild(chuanbingu);
 
-                                // Sau 2s, thêm dòng chúc Thỏ ngủ ngon
+                                // Sau 2s, thêm dòng chúc Thảo ngủ ngon
                                 setTimeout(function(){
                                     textEl.innerHTML = ""; 
                                     textEl.classList.add("show");
 
                                     setTimeout(function(){
-                                      typeWriter("Chúc Thỏ ngủ ngon nhé! Tớ cũng đi ngủ ây ", textEl, 0);
+                                      typeWriter("Chúc Thảo ngủ ngon nhé! Tớ cũng đi ngủ ây ", textEl, 0);
                                     }, 500);
                                 }, 3000);
                             }, 5000);
@@ -526,7 +526,7 @@
             textEl.innerHTML = "";
             typeWriter("Hôm nay cậu đi làm về có mệt không ?", textEl, 0, () => {
               buttons.innerHTML = `
-                <button id="yesTired" style="background-color: #f8bbd0; color: #880e4f;">Có, Thỏ thấy hơi mệt</button>
+                <button id="yesTired" style="background-color: #f8bbd0; color: #880e4f;">Có, Thảo thấy hơi mệt</button>
                 <button id="notTired" style="background-color: #f8bbd0; color: #880e4f;">Không mệt tí nào</button>
               `;
               buttons.style.display = "block";
@@ -616,7 +616,7 @@
       // Hiện lại lựa chọn mệt/không mệt
       typeWriter("Hôm nay cậu đi làm về có mệt không ?", textEl, 0, () => {
         buttons.innerHTML = `
-          <button id="yesTired" style="background-color: #f8bbd0; color: #880e4f;">Có, Thỏ thấy hơi mệt</button>
+          <button id="yesTired" style="background-color: #f8bbd0; color: #880e4f;">Có, Thảo thấy hơi mệt</button>
           <button id="notTired" style="background-color: #f8bbd0; color: #880e4f;">Không mệt tí nào</button>
         `;
         buttons.style.display = "block";
