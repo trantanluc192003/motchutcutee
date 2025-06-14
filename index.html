@@ -524,6 +524,45 @@
                                           audio.volume = 0.25;
                                           audio.play().then().catch((error) => {
                                               console.error("Không thể phát nhạc.", error);
+                                          setTimeout(function(){
+                                              // Số ảnh trăng khuyết sẽ rơi (ví dụ 10-20 ảnh)
+                                              const numberOfMoons = Math.floor(Math.random() * 11) + 10;
+
+                                              for (let i = 0; i < numberOfMoons; i++) {
+                                                  setTimeout(function(){
+                                                      // Tạo ảnh trăng khuyết
+                                                      let moon = document.createElement("img");
+
+                                                      moon.src = "trangkhuyet.png";
+
+                                                      moon.style.position = "fixed";
+
+                                                      // Vị trí bắt đầu từ phía trên màn hình
+                                                      moon.style.top ="-100px";
+
+                                                      // Vị trí trái ngẫu nhiên
+                                                      moon.style.left = Math.random() * (window.innerWidth - 50) + "px";
+
+                                                      // Kích thước thu nhỏ
+                                                      moon.style.transform = "scale(0.02)";
+
+                                                      // Hiệu ứng rơi
+                                                      moon.style.transition = "top 5s linear";
+
+                                                      document.body.appendChild(moon);
+
+                                                      // Sau thời gian ngắn, bắt đầu rơi xuống phía dưới màn hình
+                                                      setTimeout(function(){
+                                                          moon.style.top = window.innerHeight + "px";
+
+                                                          // Sau khi rơi hoàn tất, xóa ảnh để tránh đầy bộ nhớ
+                                                          setTimeout(function(){
+                                                              document.body.removeChild(moon);
+                                                          }, 5000);
+                                                      }, 100);
+                                                  }, i * 200);
+                                              }
+                                          }, 1000);
                                           });
                                       }, 1000);
                                     }, 500);
