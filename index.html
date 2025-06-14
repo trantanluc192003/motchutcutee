@@ -166,7 +166,19 @@
       margin-top: 20px;
       flex-wrap: wrap;
     }
-
+    .moon {
+      position: fixed;
+      top: -50px;
+      z-index: 1000;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
     @keyframes fly {
       0% { opacity: 1; transform: translateY(0); }
       100% { opacity: 0; transform: translateY(-100px) rotate(720deg); }
@@ -299,6 +311,34 @@
         });
       }, 3000);
     }
+    function createMoonDrop() {
+      const moon = document.createElement("img");
+
+      // Ảnh trăng khuyết của bạn
+      moon.src = "trangkhuyet.png";
+
+      // Thêm class nếu bạn muốn thêm CSS riêng (ví dụ thêm animation rơi)
+      moon.className = "moon";
+
+      // Kích thước ngẫu nhiên từ 10px đến 30px
+      const size = 10 + Math.random() * 20;
+      moon.style.width = `${size}px`;
+      moon.style.height = `${size}px`;
+
+      // Vị trí bắt đầu rơi từ phía trên tại một tọa độ X ngẫu nhiên
+      moon.style.left = `${Math.random() * window.innerWidth}px`;
+
+      // Thời gian rơi cũng hoàn toàn ngẫu nhiên (ví dụ 3-6s)
+      moon.style.animationDuration = `${3 + Math.random() * 3}s`;
+
+      document.body.appendChild(moon);
+
+      // Sau thời gian rơi, xóa ảnh khỏi DOM
+      setTimeout(() => {
+        moon.remove();
+      }, 7000);
+    }
+
     function addAdditionalScene(){
         // Tạo nút Continue
         let continueBtn = document.createElement("button");
@@ -524,46 +564,11 @@
                                           audio.volume = 0.25;
                                           audio.play().then().catch((error) => {
                                               console.error("Không thể phát nhạc.", error);
-                                          setTimeout(function(){
-                                              // Số ảnh trăng khuyết sẽ rơi (ví dụ 10-20 ảnh)
-                                              const numberOfMoons = Math.floor(Math.random() * 11) + 10;
-
-                                              for (let i = 0; i < numberOfMoons; i++) {
-                                                  setTimeout(function(){
-                                                      // Tạo ảnh trăng khuyết
-                                                      let moon = document.createElement("img");
-
-                                                      moon.src = "trangkhuyet.png";
-
-                                                      moon.style.position = "fixed";
-
-                                                      // Vị trí bắt đầu từ phía trên màn hình
-                                                      moon.style.top ="-100px";
-
-                                                      // Vị trí trái ngẫu nhiên
-                                                      moon.style.left = Math.random() * (window.innerWidth - 50) + "px";
-
-                                                      // Kích thước thu nhỏ
-                                                      moon.style.transform = "scale(0.02)";
-
-                                                      // Hiệu ứng rơi
-                                                      moon.style.transition = "top 5s linear";
-
-                                                      document.body.appendChild(moon);
-
-                                                      // Sau thời gian ngắn, bắt đầu rơi xuống phía dưới màn hình
-                                                      setTimeout(function(){
-                                                          moon.style.top = window.innerHeight + "px";
-
-                                                          // Sau khi rơi hoàn tất, xóa ảnh để tránh đầy bộ nhớ
-                                                          setTimeout(function(){
-                                                              document.body.removeChild(moon);
-                                                          }, 5000);
-                                                      }, 100);
-                                                  }, i * 200);
-                                              }
-                                          }, 1000);
+                                              
                                           });
+                                          setTimeout(function(){
+                                              setInterval(createMoonDrop, 200);
+                                          }, 2000)
                                       }, 1000);
                                     }, 500);
 
