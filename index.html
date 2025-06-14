@@ -198,7 +198,7 @@
   </div>
 
   <img id="hoitham" src="hoitham.png" alt="Hỏi thăm">
-  <img id="meodicho" src="meodicho.jpeg" alt="Mèo đi chợ">
+  <img id="meodicho" src="meodicho.jpeg" alt="Mèo đi chợ" style="display: none;width: 450px;height: 450px;"/>
   <img id="nauan" src="nauan.jpeg" alt="Nấu ăn">
 
   <div id="dishes" class="dish-container">
@@ -536,11 +536,11 @@
                 textEl.classList.add("show");
                 hoitham.style.display = "none";
 
-                typeWriter("Cậu vào nghỉ ngơi đi, để tớ đi chợ mua đồ nấu cho cậu ăn nhé", textEl, 0, () => {
+                typeWriter("Cậu vào nghỉ ngơi xíu đi nhé, để tớ đi chợ mua gì đó nấu cho cậu ăn nhé😉", textEl, 0, () => {
                   setTimeout(() => {
                     meodicho.style.display = "block";
                     textEl.innerHTML = "";
-                    typeWriter("Trời ơi giấy nguyên liệu mà anh kia viết chữ xấu thế!", textEl, 0, () => {
+                    typeWriter("Trời ơi giấy ghi nguyên liệu mà anh kia viết chữ xấu thế !!", textEl, 0, () => {
                     setTimeout(() => {
                       meodicho.style.display = "none";
                       textEl.innerHTML = "";
