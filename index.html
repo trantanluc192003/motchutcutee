@@ -357,6 +357,13 @@
 
             // Sau 2s, hiện ảnh timbaoboi.webp với dòng thoại
             setTimeout(function(){
+                // Hiện dòng thoại
+                textEl.innerHTML = ""; 
+                textEl.classList.add("show");
+
+                setTimeout(function(){
+                    typeWriter("Cậu học bài à, để tớ tìm gì đó giúp cậu nha", textEl, 0);
+                }, 500);
                 let timbaoboi = document.createElement("img");
 
                 timbaoboi.id = "timbaoboi";
@@ -374,13 +381,7 @@
                 timbaoboi.style.height = "320px";
                 document.body.appendChild(timbaoboi);
 
-                // Hiện dòng thoại
-                textEl.innerHTML = ""; 
-                textEl.classList.add("show");
 
-                setTimeout(function(){
-                    typeWriter("Cậu học bài à, để tớ tìm gì đó giúp cậu nha", textEl, 0);
-                }, 500);
 
                 // Sau 3s, ẩn ảnh timbaoboi.webp
                 setTimeout(function(){
