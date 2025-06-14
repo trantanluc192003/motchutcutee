@@ -492,13 +492,33 @@
                                 chuanbingu.style.height = "500px";
                                 document.body.appendChild(chuanbingu);
 
+                                // Hiện ảnh mattrang
+                                let mattrang = document.createElement("img");
+
+                                mattrang.id = "mattrang";
+
+                                mattrang.src = "mattrang.gif";
+
+                                mattrang.style.position = "fixed";
+
+                                mattrang.style.top = "20px";
+
+                                mattrang.style.right = "20px";
+
+                                mattrang.style.zIndex = "100";
+
+                                mattrang.style.width = "100px";
+
+                                mattrang.style.height = "100px";
+
+                                document.body.appendChild(mattrang);
                                 // Sau 2s, thêm dòng chúc Thảo ngủ ngon
                                 setTimeout(function(){
                                     textEl.innerHTML = ""; 
                                     textEl.classList.add("show");
 
                                     setTimeout(function(){
-                                      typeWriter("Chúc Thảo ngủ ngon nhé! Tớ cũng đi ngủ ây ", textEl, 0);
+                                      typeWriter("Chúc Thảo ngủ ngon nhée !  ", textEl, 0);
                                     }, 500);
                                 }, 3000);
                             }, 5000);
