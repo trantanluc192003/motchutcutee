@@ -10,7 +10,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #fffafc;
+      background-color: #fee3ee;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -318,7 +318,10 @@
         continueBtn.style.fontSize = "16px";
 
         continueBtn.style.zIndex = "100";
-
+        continueBtn.style.backgroundColor = "#FFC0CB";
+        continueBtn.style.border = "none";
+        continueBtn.style.color = "#fff"; 
+        continueBtn.style.borderRadius = "20px";
         document.body.appendChild(continueBtn);
 
         continueBtn.onclick = function(){
@@ -371,7 +374,9 @@
                 textEl.innerHTML = ""; 
                 textEl.classList.add("show");
 
-                typeWriter("Cậu học bài à, để tớ tìm gì đó giúp cậu nha", textEl, 0);
+                setTimeout(function(){
+                    typeWriter("Cậu học bài à, để tớ tìm gì đó giúp cậu nha", textEl, 0);
+                }, 500);
 
                 // Sau 3s, ẩn ảnh timbaoboi.webp
                 setTimeout(function(){
@@ -397,15 +402,105 @@
 
                     document.body.appendChild(banhmi);
 
-                    // Hiện dòng "Đây ròiii"
+                    // Hiện dòng "Đây ròiii, chúc cậu học bài tốt nè"
                     textEl.innerHTML = ""; 
                     textEl.classList.add("show");
 
-                    typeWriter("Đây ròiii", textEl, 0);
-                }, 6000);
+                    setTimeout(function(){
+                        typeWriter("Đây ròiii, chúc cậu học bài tốt nè ", textEl, 0);
+                    }, 500);
+
+                    // Sau 6s, ẩn ảnh banhmi.webp + dòng "Đây ròiii"
+                    setTimeout(function(){
+                        banhmi.remove();
+
+                        textEl.innerHTML = ""; 
+                        textEl.classList.remove("show");
+
+                        // Hiện ảnh clock.gif
+                        let clock = document.createElement("img");
+
+                        clock.id = "clock";
+
+                        clock.src = "clock.gif";
+
+                        clock.style.position = "fixed";
+
+                        clock.style.bottom = "20px";
+
+                        clock.style.right = "20px";
+
+                        clock.style.zIndex = "100";
+
+                        document.body.appendChild(clock);
+
+                        // Sau 5s, hiện dòng "Muộn rồi nè, Thỏ đi nghỉ ngơi đi nhé"
+                        setTimeout(function(){
+                            textEl.innerHTML = ""; 
+                            textEl.classList.add("show");
+
+                            setTimeout(function(){
+                                typeWriter("Muộn rồi nè, Thỏ đi nghỉ ngơi đi nhé", textEl, 0);
+                            }, 500);
+
+                            // Sau 5s, ẩn ảnh clock + dòng "Muộn rồi…" 
+                            setTimeout(function(){
+                                clock.remove();
+
+                                textEl.innerHTML = ""; 
+                                textEl.classList.remove("show");
+
+                                // Hiện ảnh dingu.jpg
+                                let dingu = document.createElement("img");
+
+                                dingu.id = "dingu";
+
+                                dingu.src = "dingu.jpg";
+
+                                dingu.style.position = "fixed";
+
+                                dingu.style.bottom = "20px";
+
+                                dingu.style.left = "20px";
+
+                                dingu.style.zIndex = "100";
+
+                                document.body.appendChild(dingu);
+
+                                // Hiện ảnh chuanbingu.jpg
+                                let chuanbingu = document.createElement("img");
+
+                                chuanbingu.id = "chuanbingu";
+
+                                chuanbingu.src = "chuanbingu.jpg";
+
+                                chuanbingu.style.position = "fixed";
+
+                                chuanbingu.style.bottom = "20px";
+
+                                chuanbingu.style.right = "20px";
+
+                                chuanbingu.style.zIndex = "100";
+
+                                document.body.appendChild(chuanbingu);
+
+                                // Sau 2s, thêm dòng chúc Thỏ ngủ ngon
+                                setTimeout(function(){
+                                    textEl.innerHTML = ""; 
+                                    textEl.classList.add("show");
+
+                                    setTimeout(function(){
+                                      typeWriter("Chúc Thỏ ngủ ngon nhé!", textEl, 0);
+                                    }, 500);
+                                }, 2000);
+                            }, 5000);
+                        }, 5000);
+                    }, 6000);
+                }, 3000);
             }, 2000);
         };
     }
+
 
 
     document.getElementById("accept").addEventListener("click", () => {
